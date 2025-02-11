@@ -2,22 +2,17 @@ package ru.netology.stats;
 
 public class StatsService {
 
-    public int amountSales(long[] sales) {
-        int amount = 0;
+    public long amountSales(long[] sales) {
+        long totalSale = 0;
 
-        for (long i : sales) {
-            amount += (int) i;
+        for (long sale : sales) {
+            totalSale += sale;
         }
-        return amount;
+        return totalSale;
     }
 
-    public int averageSales(long[] sales) {
-        int amount = 0;
-
-        for (long i : sales) {
-            amount += (int) i;
-        }
-        return amount / sales.length;
+    public long averageSales(long[] sales) {
+        return amountSales(sales) / 12;
     }
 
 
@@ -29,7 +24,6 @@ public class StatsService {
                 maxMonth = i;
             }
         }
-
         return maxMonth + 1;
     }
 
@@ -42,45 +36,28 @@ public class StatsService {
                 minMonth = i; // запомним его как минимальный
             }
         }
-
         return minMonth + 1; // месяца нумеруются с 1, а индексы массива с 0, нужно сдвинуть ответ на 1
     }
 
     public int belowAverageSales(long[] sales) {
-        long amout = 0;
-
-        for (long i : sales) {
-            amout += i;
-        }
-
-        double average = (double) amout / sales.length;
-        int month = 0;
-
-        for (long i : sales) {
-            if (i < average) {
-                month++;
+        long average = averageSales(sales);
+        int couter = 0;
+        for (long sale : sales) {
+            if (sale < average) {
+                couter++;
             }
         }
-
-        return month;
+        return couter;
     }
 
     public int aboveAverageSales(long[] sales) {
-        long amout = 0;
-
-        for (long i : sales) {
-            amout += i;
-        }
-
-        double average = (double) amout / sales.length;
-        int month = 0;
-
-        for (long i : sales) {
-            if (i > average) {
-                month++;
+        long average = averageSales(sales);
+        int couter = 0;
+        for (long sale : sales) {
+            if (sale > average) {
+                couter++;
             }
         }
-
-        return month;
+        return couter;
     }
 }
